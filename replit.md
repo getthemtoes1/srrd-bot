@@ -1,35 +1,38 @@
 # SRRD Bot
 
 ## Overview
-This is a simple Python bot application imported from GitHub (https://github.com/getthemtoes1/srrd-bot).
+A Discord bot application imported from GitHub (https://github.com/getthemtoes1/srrd-bot).
 
-**Current State**: Basic bot structure created. The original repository was empty except for a .gitignore file.
+**Current State**: Bot is online and connected to Discord.
 
 ## Recent Changes
 - **December 1, 2025**: Initial setup in Replit environment
-  - Installed Python 3.11
-  - Created basic bot structure with main.py
+  - Installed Python 3.11 with discord.py library
+  - Created Discord bot with basic commands
   - Set up workflow for running the bot
-  - Added requirements.txt for future dependencies
+  - Configured DISCORD_BOT_TOKEN secret
 
 ## Project Architecture
 - **Language**: Python 3.11
+- **Framework**: discord.py
 - **Entry Point**: main.py
-- **Type**: Console/Terminal Bot Application
+- **Type**: Discord Bot
 
 ## Structure
 ```
 .
-├── main.py           # Main bot application
-├── requirements.txt  # Python dependencies
-└── README.md        # Original repository README
+├── main.py           # Discord bot application
+├── requirements.txt  # Python dependencies (discord.py)
+└── README.md         # Original repository README
 ```
 
-## How to Run
-The bot runs automatically via the configured workflow. It provides a simple interactive console interface.
+## Bot Commands
+- `!ping` - Check bot latency
+- `!hello` - Get a greeting from the bot
+- `!info` - Display bot information
 
-## Future Enhancements
-- Add specific bot functionality (Discord, Telegram, Slack, etc.)
-- Implement configuration file support
-- Add logging capabilities
-- Integrate external APIs as needed
+## Secrets Required
+- `DISCORD_BOT_TOKEN` - Your Discord bot token from the Developer Portal
+
+## How to Run
+The bot runs automatically via the "Run Bot" workflow. It connects to Discord and responds to commands with the `!` prefix.
