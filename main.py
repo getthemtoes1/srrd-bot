@@ -8,6 +8,22 @@ import os
 import sqlite3
 from datetime import datetime
 from typing import Optional, Any, Iterable, cast
+from flask import Flask
+from threading import Thread
+```
+
+## Step 3: Restart Your Bot
+
+1. Click **"Stop"** button
+2. Click **"Run"** button
+3. Wait for it to start
+4. You should see: `✅ Web server started on port 8080`
+
+## Step 4: Get Your URL
+
+After it starts, your URL will be:
+```
+https://srrd-bot.hehepooppee000.repl.co
 
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
