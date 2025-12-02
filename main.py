@@ -25,7 +25,7 @@ def run_web_server():
     web_app.run(host='0.0.0.0', port=8080, debug=False, use_reloader=False)
 
 load_dotenv()
-token = os.getenv('DISCORD_TOKEN')
+token = os.getenv(DISCORD_TOKEN)
 
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
 logging.basicConfig(handlers=[handler], level=logging.INFO, format='%(asctime)s - %(message)s')
