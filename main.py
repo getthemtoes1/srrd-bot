@@ -8,24 +8,9 @@ import os
 import sqlite3
 from datetime import datetime
 from typing import Optional, Any, Iterable, cast
-from flask import Flask
-from threading import Thread
-```
-
-# Create Flask web server
-web_app = Flask(__name__)
-
-@web_app.route('/')
-def home():
-    """Simple endpoint for Uptime Robot"""
-    return {'status': 'Bot is online', 'bot_name': 'FBI - SRRD Operations'}, 200
-
-def run_web_server():
-    """Run Flask server in background"""
-    web_app.run(host='0.0.0.0', port=8080, debug=False, use_reloader=False)
 
 load_dotenv()
-token = os.getenv(DISCORD_TOKEN)
+token = os.getenv('DISCORD_TOKEN')
 
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
 logging.basicConfig(handlers=[handler], level=logging.INFO, format='%(asctime)s - %(message)s')
@@ -1590,20 +1575,6 @@ async def on_ready() -> None:
     print(f"✅ Bot online: {bot.user.name}")
 
 
-import asyncio
-
-async def keep_alive_ping():
-    """Ping the bot periodically to keep Replit active"""
-    await bot.wait_until_ready()
-    while True:
-        try:
-            # Just log that bot is alive
-            logging.info("Bot keep-alive ping")
-            await asyncio.sleep(300)  # Ping every 5 minutes
-        except Exception as err:
-            logging.error(f"Keep-alive error: {err}")
-            await asyncio.sleep(300)
-
 def main() -> None:
     """Main function to start the bot"""
     init_db()
@@ -1613,12 +1584,8 @@ def main() -> None:
         await bot.add_cog(PromotionsCog(bot))
         await bot.add_cog(InfractionsCog(bot))
         await bot.add_cog(TryoutCog(bot))
-    
+
     bot.setup_hook = load_cogs
-    
-    # Start keep-alive task
-    bot.loop.create_task(keep_alive_ping())
-    
     bot.run(token)
 
 
