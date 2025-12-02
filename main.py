@@ -1590,22 +1590,35 @@ async def on_ready() -> None:
     print(f"✅ Bot online: {bot.user.name}")
 
 
+import asyncio
+
+async def keep_alive_ping():
+    """Ping the bot periodically to keep Replit active"""
+    await bot.wait_until_ready()
+    while True:
+        try:
+            # Just log that bot is alive
+            logging.info("Bot keep-alive ping")
+            await asyncio.sleep(300)  # Ping every 5 minutes
+        except Exception as err:
+            logging.error(f"Keep-alive error: {err}")
+            await asyncio.sleep(300)
+
 def main() -> None:
     """Main function to start the bot"""
     init_db()
-    
-    # Start Flask server in background thread
-    web_thread = Thread(target=run_web_server, daemon=True)
-    web_thread.start()
-    print("Web server started on port 8080")
 
     async def load_cogs() -> None:
         """Load all cogs"""
         await bot.add_cog(PromotionsCog(bot))
         await bot.add_cog(InfractionsCog(bot))
         await bot.add_cog(TryoutCog(bot))
-
+    
     bot.setup_hook = load_cogs
+    
+    # Start keep-alive task
+    bot.loop.create_task(keep_alive_ping())
+    
     bot.run(token)
 
 
