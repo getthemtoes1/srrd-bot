@@ -1,3 +1,2 @@
-# Add your Python dependencies here
-# Example: discord.py, requests, etc.
 discord.py
+python-dotenv
