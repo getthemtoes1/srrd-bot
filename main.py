@@ -12,18 +12,17 @@ from flask import Flask
 from threading import Thread
 ```
 
-## Step 3: Restart Your Bot
+# Create Flask web server
+web_app = Flask(__name__)
 
-1. Click **"Stop"** button
-2. Click **"Run"** button
-3. Wait for it to start
-4. You should see: `✅ Web server started on port 8080`
+@web_app.route('/')
+def home():
+    """Simple endpoint for Uptime Robot"""
+    return {'status': 'Bot is online', 'bot_name': 'FBI - SRRD Operations'}, 200
 
-## Step 4: Get Your URL
-
-After it starts, your URL will be:
-```
-https://srrd-bot.hehepooppee000.repl.co
+def run_web_server():
+    """Run Flask server in background"""
+    web_app.run(host='0.0.0.0', port=8080, debug=False, use_reloader=False)
 
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
@@ -1594,6 +1593,11 @@ async def on_ready() -> None:
 def main() -> None:
     """Main function to start the bot"""
     init_db()
+    
+    # Start Flask server in background thread
+    web_thread = Thread(target=run_web_server, daemon=True)
+    web_thread.start()
+    print("Web server started on port 8080")
 
     async def load_cogs() -> None:
         """Load all cogs"""
